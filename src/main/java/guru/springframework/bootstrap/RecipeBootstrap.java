@@ -26,12 +26,14 @@ import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *<p></p><br>10 lut 2019
  * @author RS
  *
  */
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
@@ -50,10 +52,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
 
 	@Override
-	@Transactional
+	@Transactional // zapobiega bledowy lazy initialization exception - gdy wyjdzie sie poza transakcje, 
+				   // tutaj zawsze bedzie w transakcji
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		recipeRepository.saveAll(getRecipes());
-		
+		log.debug("Loading bootstap data");
 	}
 	
 	

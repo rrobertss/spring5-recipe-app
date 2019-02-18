@@ -6,23 +6,19 @@
  */
 package guru.springframework.controllers;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import guru.springframework.domain.Category;
-import guru.springframework.domain.UnitOfMeasure;
-import guru.springframework.repositories.CategoryRepository;
-import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *<p></p><br>30 sty 2019
  * @author RS
  *
  */
+@Slf4j
 @Controller
 public class IndexController {
 
@@ -35,7 +31,7 @@ public class IndexController {
 
 	@RequestMapping({"", "/", "/index", "/index.html"})
 	public String getIndexPage(Model model) {
-		
+		log.debug("get index page");
 		model.addAttribute("recipes", recipeService.getRecipes());
 		
 		return "index";

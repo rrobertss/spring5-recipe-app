@@ -16,11 +16,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  *<p>Skladnik</p><br>10 lut 2019
  * @author RS
  *
  */
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -35,8 +40,6 @@ public class Ingredient {
 	// eager - za kazdym razem dane beda pobierane od razu z DB
 	@OneToOne(fetch = FetchType.EAGER) 
 	private UnitOfMeasure uom;
-	
-	
 	
 	
 	public Ingredient() {
@@ -55,38 +58,5 @@ public class Ingredient {
 		this.uom = uom;
 		this.recipe = recipe;
 	}
-
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public BigDecimal getAmount() {
-		return amount;
-	}
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-	public Recipe getRecipe() {
-		return recipe;
-	}
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-	public UnitOfMeasure getUom() {
-		return uom;
-	}
-	public void setUom(UnitOfMeasure uom) {
-		this.uom = uom;
-	}
-	
 	
 }
