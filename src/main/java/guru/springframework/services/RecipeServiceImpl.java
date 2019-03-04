@@ -34,7 +34,7 @@ public class RecipeServiceImpl implements RecipeService{
 	
 	@Override
 	public Set<Recipe> getRecipes() {
-		log.debug("getRecipes");
+//		log.debug("getRecipes");
 		Set<Recipe> set = new HashSet<Recipe>();
 		// dzialaja obydwie, z Javy 8
 //		recipeRepository.findAll().iterator().forEachRemaining(recipe -> set.add(recipe));
