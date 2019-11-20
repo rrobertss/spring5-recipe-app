@@ -6,9 +6,9 @@
  */
 package guru.springframework.services;
 
-import java.util.Set;
-
 import guru.springframework.domain.Recipe;
+
+import java.util.Set;
 
 /**
  *<p></p><br>11 lut 2019
@@ -18,4 +18,6 @@ import guru.springframework.domain.Recipe;
 public interface RecipeService {
 
 	Set<Recipe>getRecipes();
+	Recipe findById(Long id);
+
 }

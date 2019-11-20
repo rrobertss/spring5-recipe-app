@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 <title>Recipe Home</title>
@@ -36,15 +36,18 @@ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07j
 							<tr>
 								<td>Id</td>
 								<td>Description</td>
+								<th>View</th>
 							</tr>
 							</thead>
 							<tr th:remove="all">
 								<td th:text="${recipe.id]}">123</td>
 								<td th:text="${recipe.description}">Tasty</td>
+								<td><a href="#">View</a></td>
 							</tr>
 							<tr th:remove="all">
 								<td th:text="${recipe.id]}">123</td>
 								<td th:text="${recipe.description}">Tasty</td>
+								<td><a href="#">View</a></td>
 							</tr>
 							<tr th:each="recipe : ${recipes}">
 								<!-- /*@thymesVar id="recipe" type="guru.springframework.domain.Recipe" -->
