@@ -40,7 +40,7 @@ public class Recipe {
 	private Notes notes;
 	// encja Recipe jest wlascicielem relacji, moze usuwac ingredient; mappedBy - zmienna w klasie z relacją, u nas 'recipe'
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="recipe")
-	private Set<Ingredient>ingrediens = new HashSet<Ingredient>();
+	private Set<Ingredient>ingredients = new HashSet<Ingredient>();
 	// domyslnie jest ORDINAL - dane zachwywane w DB jako Integer (1,2,3,...), nie mozna zmieniac kolejnosci lub ilosci w enum, bo dane w DB beda wskazywac na inna wartosc, 
 	// przy STRING - jako String - zachowuje w DB cala wartosc enuma jako String
 	@Enumerated(value = EnumType.STRING)
@@ -52,13 +52,15 @@ public class Recipe {
 
 	
 	public void setNotes(Notes notes) {
-		this.notes = notes;
-		notes.setRecipe(this);
+		if (notes != null) {
+			this.notes = notes;
+			notes.setRecipe(this);
+		}
 	}
 	
 	public Recipe addIngredient(Ingredient ingredient) {
 		ingredient.setRecipe(this);
-		this.ingrediens.add(ingredient);
+		this.ingredients.add(ingredient);
 		return this;
 	}
 
