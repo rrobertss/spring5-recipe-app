@@ -52,7 +52,7 @@ public class IngredientCommandToIngredientTest {
         ingredientCommand.setAmount(AMOUNT);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
-        ingredientCommand.setUnitOfMeasure(unitOfMeasureCommand);
+        ingredientCommand.setUom(unitOfMeasureCommand);
 
         // when
         Ingredient ingredient = converter.convert(ingredientCommand);

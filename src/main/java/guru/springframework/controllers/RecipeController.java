@@ -1,9 +1,12 @@
 package guru.springframework.controllers;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -19,10 +22,50 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping("/recipe/show/{id}")
+    @RequestMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
         return "recipe/show";
+    }
+
+    /**
+     * Rendering view
+     * @param model
+     * @return view's name
+     */
+    @RequestMapping("recipe/new")
+    public String newRecipe(Model model){
+        model.addAttribute("recipe", new RecipeCommand());
+        // recipe/new - jest sciezka w pasku adresu przegladarki
+        // zwraca nazwe widoku - pliku html
+        return "recipe/recipeform";
+    }
+
+    /**
+     * PathVariable wyciaga id z Springa MVC i przekazuje do modelu
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("recipe/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+
+        return "recipe/recipeform";
+    }
+
+
+    /**
+     * Adnotacja ModelAttribute laczy pola formularza z obiektem recipeCommand
+     * @param recipeCommand {@link RecipeCommand}
+     * @return
+     */
+    @PostMapping
+    @RequestMapping("recipe")
+    public String saveUpdate(@ModelAttribute RecipeCommand recipeCommand){
+        RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
+
+        return "redirect:/recipe/show/" + savedCommand.getId();
     }
 }
