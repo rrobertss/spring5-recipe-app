@@ -63,9 +63,9 @@ public class RecipeController {
      */
     @PostMapping
     @RequestMapping("recipe")
-    public String saveUpdate(@ModelAttribute RecipeCommand recipeCommand){
+    public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
 
-        return "redirect:/recipe/show/" + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 }
