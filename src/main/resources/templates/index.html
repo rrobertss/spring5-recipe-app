@@ -40,6 +40,7 @@ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07j
 								<td>Description</td>
 								<th>View</th>
 								<th>Update</th>
+								<th>Delete</th>
 							</tr>
 							</thead>
 							<tr th:remove="all">
@@ -47,12 +48,14 @@ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07j
 								<td th:text="${recipe.description}">Tasty</td>
 								<td><a href="#">View</a></td>
 								<td><a href="#">Update</a></td>
+								<td><a href="#">Delete</a></td>
 							</tr>
 							<tr th:remove="all">
 								<td th:text="${recipe.id]}">123</td>
 								<td th:text="${recipe.description}">Tasty</td>
 								<td><a href="#">View</a></td>
 								<td><a href="#">Update</a></td>
+								<td><a href="#">Delete</a></td>
 							</tr>
 							<tr th:each="recipe : ${recipes}">
 								<!-- /*@thymesVar id="recipe" type="guru.springframework.domain.Recipe" -->
@@ -60,6 +63,7 @@ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07j
 								<td th:text="${recipe.description}">Tasty</td>
 								<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
 								<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+								<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
 							</tr>
 						</table>
 					</div>

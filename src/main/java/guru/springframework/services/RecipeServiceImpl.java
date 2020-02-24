@@ -43,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService{
 	
 	@Override
 	public Set<Recipe> getRecipes() {
-//		log.debug("getRecipes");
+		log.debug("in service, getRecipes");
 		Set<Recipe> set = new HashSet<>();
 		// dzialaja obydwie, z Javy 8
 //		recipeRepository.findAll().iterator().forEachRemaining(recipe -> set.add(recipe));
@@ -74,6 +74,12 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public RecipeCommand findCommandById(Long id) {
 		return recipeToRecipeCommand.convert(findById(id));
+	}
+
+
+	@Override
+	public void deleteById(Long id) {
+		recipeRepository.deleteById(id);
 	}
 
 
