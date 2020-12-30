@@ -6,6 +6,7 @@
  */
 package guru.springframework.services;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
@@ -64,6 +65,26 @@ public class RecipeServiceImplTest {
 		verify(recipeRepository, never()).findAll();
 	}
 
+	@Test
+	public void getRecipeCommandByIdTest() throws Exception{
+		Recipe recipe = new Recipe();
+		recipe.setId(1L);
+		Optional<Recipe>optionalRecipe = Optional.of(recipe);
+
+		when(recipeRepository.findById(anyLong())).thenReturn(optionalRecipe);
+
+		RecipeCommand recipeCommand = new RecipeCommand();
+		recipeCommand.setId(1L);
+
+		when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+		RecipeCommand commamdById = recipeService.findCommandById(1L);
+
+		assertNotNull("Null recipe returned", commamdById);
+		verify(recipeRepository, times(1)).findById(anyLong());
+		verify(recipeRepository, never()).findAll();
+	}
+
 
 	/**
 	 * Test method for {@link guru.springframework.services.RecipeServiceImpl#getRecipes()}.
@@ -87,9 +108,11 @@ public class RecipeServiceImplTest {
 	public void testDeleteById() throws Exception{
 		// given
 		Long id = new Long(2L);
-		// when
+
+		// brak 'when' - gdy metoda zwraca void
 		recipeService.deleteById(id);
-		//then
+
+		// then
 		verify(recipeRepository, times(1)).deleteById(anyLong());
 
 	}
