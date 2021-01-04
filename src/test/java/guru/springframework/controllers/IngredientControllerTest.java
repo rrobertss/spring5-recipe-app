@@ -1,6 +1,8 @@
 package guru.springframework.controllers;
 
+import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created: 2020-12-30  18:02
  */
 public class IngredientControllerTest {
+
+    @Mock
+    IngredientService ingredientService;
 
     @Mock
     RecipeService recipeService;
@@ -52,5 +57,19 @@ public class IngredientControllerTest {
 
         // then
         verify(recipeService, times(1)).findCommandById(anyLong());
+    }
+
+
+    @Test
+    public void testShowIngredients() throws Exception{
+        // given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+
+        // when
+        when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
+
+        // then
+
+
     }
 }
