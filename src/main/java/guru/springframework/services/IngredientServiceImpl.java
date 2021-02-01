@@ -119,4 +119,30 @@ public class IngredientServiceImpl implements IngredientService{
         }
     }
 
+    @Override
+    public void deleteIngredientById(Long recipeId, Long ingredientId) {
+        log.debug("Delete ingredient; recipe: "+recipeId+", ingredient: "+ingredientId);
+        Optional<Recipe>recipeOptional = recipeRepository.findById(Long.valueOf(recipeId));
+        if (recipeOptional.isPresent()){
+            Recipe recipe = recipeOptional.get();
+            Optional<Ingredient>ingredientOptional = recipe.getIngredients()
+                    .stream()
+                    .filter(ingredient -> ingredient.getId().equals(ingredientId))
+                    .findFirst();
+
+            if (ingredientOptional.isPresent()){
+                Ingredient ingredientToDelete = ingredientOptional.get();
+                ingredientToDelete.setRecipe(null); // Hibernate dopiero wtedy skasuje z bazy danych
+                recipe.getIngredients().remove(ingredientToDelete);
+                recipeRepository.save(recipe);
+            }
+            else {
+                log.debug("ingredient not found, ingredient id " + ingredientId);
+            }
+        }
+        else{
+            log.debug("Recipe not found, recipe id " + recipeId);
+        }
+    }
+
 }
