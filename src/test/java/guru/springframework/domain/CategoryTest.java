@@ -6,10 +6,10 @@
  */
 package guru.springframework.domain;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *<p></p><br>24 lut 2019

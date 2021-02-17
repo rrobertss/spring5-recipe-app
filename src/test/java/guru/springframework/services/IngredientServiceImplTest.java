@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;

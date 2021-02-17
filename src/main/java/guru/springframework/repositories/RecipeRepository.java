@@ -6,9 +6,8 @@
  */
 package guru.springframework.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-
 import guru.springframework.domain.Recipe;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  *<p></p><br>10 lut 2019
